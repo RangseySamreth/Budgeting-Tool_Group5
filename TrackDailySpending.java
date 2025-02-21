@@ -12,12 +12,22 @@ public class TrackDailySpending {
 
     // Method to track daily spending and update the balance
     public static void trackSpending(int userId, double currentBalance) {
-        double dailyLimit = 0;
+        double dailyLimit;
         double totalSpending = 0;
         boolean overspent = false;
 
-        System.out.print("Enter how much you would like to spend each day: $");
-        dailyLimit = getUserAmount(); // Get user input for daily limit
+        // Ensure the daily spending limit does not exceed the monthly budget
+        while (true) {
+            System.out.print("Enter how much you would like to spend each day: $");
+            dailyLimit = getUserAmount();
+
+            if (dailyLimit * 31 > currentBalance) {
+                System.out.println("Warning: Your daily spending limit will exceed your available balance in a month!");
+                System.out.println("Please enter a lower daily limit.");
+            } else {
+                break;
+            }
+        }
 
         System.out.println("Your daily limit is set to: $" + dailyLimit);
 

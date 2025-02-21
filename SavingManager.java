@@ -4,7 +4,7 @@ import java.sql.*;
 import java.time.LocalDate;
 
 public class SavingManager {
-    private static final String DB_URL = "jdbc:sqlite:budgeting.db"; // Your database URL
+    private static final String DB_URL = "jdbc:sqlite:budgeting.db";
 
     // Method to add savings to the user's account
     public static void addSavings(int userId, double amountToSave) {
@@ -25,7 +25,7 @@ public class SavingManager {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, userId);
             pstmt.setDouble(2, savedAmount);
-            pstmt.setString(3, LocalDate.now().toString()); // Save current date as date_saved
+            pstmt.setString(3, LocalDate.now().toString()); 
             pstmt.executeUpdate();
         }
     }
@@ -49,8 +49,28 @@ public class SavingManager {
     }
 
     // Display the total savings for a user
-    public static void displayTotalSavings(int userId) {
-        double totalSavings = getTotalSavings(userId);
-        System.out.println("User " + userId + "'s total savings: $" + totalSavings);
+    public static void displaySavingHistory(int userId) {
+        String sql = "SELECT saved_amount, date_saved FROM savings WHERE user_id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, userId);
+            ResultSet rs = pstmt.executeQuery();
+
+            System.out.println("------------------------------------------------");
+            System.out.printf("%-10s | %-15s\n", "Amount", "Date Saved");
+            System.out.println("------------------------------------------------");
+
+            while (rs.next()) {
+                double amount = rs.getDouble("saved_amount");
+                String dateSaved = rs.getString("date_saved");
+                System.out.printf("%-10.2f | %-15s\n", amount, dateSaved);
+            }
+
+            System.out.println("------------------------------------------------");
+        } catch (SQLException e) {
+            System.out.println("Database error while retrieving savings history: " + e.getMessage());
+        }
     }
+
 }

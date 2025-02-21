@@ -39,7 +39,8 @@ public class LoginUser {
 
     public void registerUser(String username, String password) {
         String encryptedPassword = securityUtils.hashPassword(password);
-        String sql = "INSERT INTO budgeting (name, password) VALUES (?, ?)";
+        String sql = "INSERT INTO budgeting (name, password, balance) VALUES (?, ?, 0)";
+
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, username);
@@ -101,6 +102,75 @@ public class LoginUser {
         return -1; // Return an invalid user ID if not found
     }
 
+    private void manageBills(String username) {
+        int userId = getUserId(username);
+        double currentBalance = getBalanceFromDB(userId);
+        double totalSavings = SavingManager.getTotalSavings(userId);
+
+        System.out.println("Your current balance: $" + currentBalance);
+        System.out.println("Your total savings: $" + totalSavings);
+
+        System.out.println("\nYour savings history:");
+        SavingManager.displaySavingHistory(userId);
+
+        System.out.print("\nEnter your total income for this month: $");
+        double income = getValidAmount();
+        currentBalance += income;
+        updateBalance(userId, currentBalance);
+        System.out.println("Your updated balance: $" + currentBalance);
+
+        System.out.print("\nDo you want to save money? (yes/no): ");
+        String saveChoice = scanner.nextLine();
+        if (saveChoice.equalsIgnoreCase("yes")) {
+            System.out.print("Enter saving amount: $");
+            double saveAmount = getValidAmount();
+            if (saveAmount <= currentBalance) {
+                SavingManager.addSavings(userId, saveAmount);
+                currentBalance -= saveAmount;
+                updateBalance(userId, currentBalance);
+                System.out.println("Savings of $" + saveAmount + " added successfully!");
+            } else {
+                System.out.println("Not enough balance to save this amount.");
+            }
+        }
+
+        System.out.println("\nEnter your bill amounts for this month.");
+        double energyBill = getBillAmount("Energy Bill");
+        double waterBill = getBillAmount("Water Bill");
+        double rentBill = getBillAmount("Rent Bill");
+
+        double totalBills = energyBill + waterBill + rentBill;
+        if (currentBalance >= totalBills) {
+            currentBalance -= totalBills;
+            updateBalance(userId, currentBalance);
+            System.out.println("\nBills deducted successfully. Your new balance: $" + currentBalance);
+        } else {
+            System.out.println("\nNot enough balance to cover the bills.");
+        }
+
+        TrackDailySpending.trackSpending(userId, currentBalance);
+    }
+
+    private double getValidAmount() {
+        while (true) {
+            try {
+                double amount = Double.parseDouble(scanner.nextLine());
+                if (amount < 0) {
+                    System.out.println("Amount cannot be negative. Please enter a valid amount.");
+                    continue;
+                }
+                return amount;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+            }
+        }
+    }
+
+    private double getBillAmount(String billName) {
+        System.out.print("Enter " + billName + " amount: $");
+        return getValidAmount();
+    }
+
     private double getBalanceFromDB(int userId) {
         String sql = "SELECT balance FROM budgeting WHERE id = ?";
         double balance = 0;
@@ -127,51 +197,5 @@ public class LoginUser {
         } catch (SQLException e) {
             System.out.println("Database error during balance update: " + e.getMessage());
         }
-    }
-
-    private void manageBills(String username) {
-        int userId = getUserId(username);
-        double currentBalance = getBalanceFromDB(userId);
-        System.out.println("Your current balance: $" + currentBalance);
-
-        System.out.print("\nEnter your total income for this month: $");
-        double income = Double.parseDouble(scanner.nextLine());
-        currentBalance += income; // Add income to the current balance
-        updateBalance(userId, currentBalance);
-        System.out.println("Your updated balance: $" + currentBalance);
-
-        // Save money if the user chooses to
-        System.out.print("\nDo you want to save money? (yes/no): ");
-        String saveChoice = scanner.nextLine();
-        if (saveChoice.equalsIgnoreCase("yes")) {
-            System.out.print("Enter saving amount: $");
-            double saveAmount = Double.parseDouble(scanner.nextLine());
-            SavingManager.addSavings(userId, saveAmount); // Add savings
-            currentBalance -= saveAmount; // Deduct saved amount from the balance
-            updateBalance(userId, currentBalance); // Update the balance after savings
-        }
-
-        // Enter and deduct bills from the current balance
-        System.out.println("\nEnter your bill amounts for this month.");
-        double energyBill = getBillAmount("Energy Bill");
-        double waterBill = getBillAmount("Water Bill");
-        double rentBill = getBillAmount("Rent Bill");
-
-        double totalBills = energyBill + waterBill + rentBill;
-        if (currentBalance >= totalBills) {
-            currentBalance -= totalBills; // Deduct bills from the balance
-            updateBalance(userId, currentBalance); // Update the balance
-            System.out.println("\nBills deducted successfully. Your new balance: $" + currentBalance);
-        } else {
-            System.out.println("\nNot enough balance to cover the bills.");
-        }
-
-        // Track daily spending
-        TrackDailySpending.trackSpending(userId, currentBalance);
-    }
-
-    private double getBillAmount(String billName) {
-        System.out.print("Enter " + billName + " amount: $");
-        return Double.parseDouble(scanner.nextLine());
     }
 }
