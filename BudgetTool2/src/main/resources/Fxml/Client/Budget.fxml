@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="budget_view_container" stylesheets="@../../Styles/Budget.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.budget.tool.Controller.Client.BudgetController">
+
+    <VBox layoutX="20.0" layoutY="42.0" prefHeight="750.0" prefWidth="850.0" spacing="10" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <!-- Title Label -->
+        <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Budget Management" />
+
+        <!-- Daily Spending Limit -->
+        <HBox spacing="10">
+            <Label text="Enter Daily Spending Limit:" />
+            <TextField fx:id="spendingLimitField" />
+            <Button fx:id="set_limit_btn" text="Set Limit">
+            <graphic>
+               <FontIcon fill="WHITE" iconLiteral="fas-lock" iconSize="20" />
+            </graphic></Button>
+        </HBox>
+
+        <!-- Spending Tracker -->
+        <HBox spacing="10">
+            <Label text="Enter Spending Amount:" />
+            <TextField fx:id="spendingAmountField" />
+        </HBox>
+        <HBox spacing="10">
+            <Label text="Category:" />
+            <ComboBox fx:id="categoryChoiceBox1">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Food" />
+                        <String fx:value="Transport" />
+                        <String fx:value="Entertainment" />
+                        <String fx:value="Shopping" />
+                        <String fx:value="Others" />
+                    </FXCollections>
+                </items>
+            </ComboBox>
+            <Button fx:id="track_spending_btn" text="Track Spending">
+            <graphic>
+               <FontIcon iconLiteral="fas-receipt" iconSize="20" />
+            </graphic></Button>
+        </HBox>
+
+        <!-- Spending ListView -->
+        <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Spending Overview:" />
+        <ListView fx:id="spendingListView" prefHeight="120.0" />
+
+        <!-- Budget Progress Indicator -->
+        <HBox alignment="CENTER" spacing="10" styleClass="progress-indicator">
+            <Label text="Budget Usage:" />
+            <ProgressIndicator fx:id="budgetProgressIndicator" progress="0.0" />
+        </HBox>
+
+        <!-- Remaining Budget -->
+        <Label fx:id="remainingBudgetLabel" style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Remaining Budget: $0.00" />
+    </VBox>
+</AnchorPane>
