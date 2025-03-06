@@ -1,4 +1,4 @@
-package com.budget.tool.Controller.Client;
+/*package com.budget.tool.Controller.Client;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -44,4 +44,4 @@ public class DashboardController implements Initializable {
         expenses_lbl.setText("- $" + String.format("%.2f", expenses));
         budget_bar.setProgress(income > 0 ? (income - expenses) / income : 0);
     }
-}
+}*/

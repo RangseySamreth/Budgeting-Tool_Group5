@@ -1,4 +1,4 @@
-package com.budget.tool.Models;
+/*package com.budget.tool.Models;
 
 import javafx.beans.property.*;
 import java.time.LocalDate;
@@ -50,4 +50,4 @@ public class Transaction {
     public String getNote() {
         return note.get();
     }
-}
+}*/

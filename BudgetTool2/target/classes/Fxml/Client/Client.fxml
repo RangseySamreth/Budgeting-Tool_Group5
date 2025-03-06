@@ -9,7 +9,8 @@
     </left>
 
     <center>
-        <fx:include source="Dashboard.fxml"/>
+        <fx:include source="Budget.fxml"/>
+        <!-- <fx:include source="Dashboard.fxml"/> -->
     </center>
 
 </BorderPane>

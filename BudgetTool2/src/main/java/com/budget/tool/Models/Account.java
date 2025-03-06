@@ -1,4 +1,4 @@
-package com.budget.tool.Models;
+/*package com.budget.tool.Models;
 
 import javafx.beans.property.*;
 
@@ -44,4 +44,4 @@ public abstract class Account {
     public void setBalance(double newBalance) {
         this.balance.set(newBalance);
     }
-}
+}*/

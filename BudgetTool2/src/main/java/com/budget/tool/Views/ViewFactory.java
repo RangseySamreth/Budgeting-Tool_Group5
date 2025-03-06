@@ -12,9 +12,9 @@ import javafx.stage.Stage;
 public class ViewFactory {
     // Client Views
     private final StringProperty clientSelectedMenuItem;
-    private AnchorPane dashboardView;
+    /*private AnchorPane dashboardView;
     private AnchorPane transactionsView;
-    private AnchorPane accountsView;
+    private AnchorPane accountsView;*/
     private AnchorPane budgetView;
     private AnchorPane paybillsView;
 
@@ -26,7 +26,7 @@ public class ViewFactory {
         return clientSelectedMenuItem;
     }
 
-    public AnchorPane getDashboardView() {
+   /* public AnchorPane getDashboardView() {
         if (dashboardView == null){
             try {
                 dashboardView = new FXMLLoader(getClass().getResource("/Fxml/Client/Dashboard.fxml")).load();
@@ -58,7 +58,7 @@ public class ViewFactory {
             }
         }
         return accountsView;
-    }
+    }*/
 
     public AnchorPane getBudgetView() {
         if (budgetView == null){

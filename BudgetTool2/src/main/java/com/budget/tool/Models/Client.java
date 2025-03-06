@@ -1,4 +1,4 @@
-package com.budget.tool.Models;
+/*package com.budget.tool.Models;
 
 import javafx.beans.property.*;
 import java.time.LocalDate;
@@ -70,4 +70,4 @@ public class Client {
     public LocalDate getDateCreated() {
         return dateCreated.get();
     }
-}
+}*/

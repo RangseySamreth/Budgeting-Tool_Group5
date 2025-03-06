@@ -1,4 +1,4 @@
-package com.budget.tool.Controller.Client;
+/*package com.budget.tool.Controller.Client;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,4 +21,4 @@ public class TransactionsController implements Initializable {
         transaction_listview.getItems().clear();
         transaction_listview.getItems().addAll(db.getRecentTransactions());
     }
-}
+}*/

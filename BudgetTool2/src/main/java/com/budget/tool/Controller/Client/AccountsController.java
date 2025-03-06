@@ -1,4 +1,4 @@
-package com.budget.tool.Controller.Client;
+/*package com.budget.tool.Controller.Client;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -45,4 +45,4 @@ public class AccountsController implements Initializable {
             System.out.println("Invalid amount entered.");
         }
     }
-}
+}*/

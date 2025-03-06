@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ResourceBundle;
 
 public class BudgetController implements Initializable {
-    private static final String DB_URL = "jdbc:sqlite:budgeting0.db";
+    private static final String DB_URL = "jdbc:sqlite:budgeting.db";
     private int userId = 1;  // Replace with actual user ID
     private double currentBalance = 0;
     private double dailyLimit = 0;

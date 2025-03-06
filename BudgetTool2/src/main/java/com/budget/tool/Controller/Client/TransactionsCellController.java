@@ -1,4 +1,4 @@
-package com.budget.tool.Controller.Client;
+/*package com.budget.tool.Controller.Client;
 
 import com.budget.tool.Models.Transaction;
 import javafx.fxml.Initializable;
@@ -33,4 +33,4 @@ public class TransactionsCellController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {}
-}
+}*/

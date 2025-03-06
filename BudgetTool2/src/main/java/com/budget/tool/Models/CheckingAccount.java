@@ -1,4 +1,4 @@
-package com.budget.tool.Models;
+/*package com.budget.tool.Models;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -27,4 +27,4 @@ public class CheckingAccount extends Account {
     public void setTransactionLimit(int newLimit) {
         this.transactionLimit.set(newLimit);
     }
-}
+}*/

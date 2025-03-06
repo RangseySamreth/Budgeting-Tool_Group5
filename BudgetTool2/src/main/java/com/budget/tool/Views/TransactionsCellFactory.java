@@ -1,4 +1,4 @@
-package com.budget.tool.Views;
+/*package com.budget.tool.Views;
 
 import com.budget.tool.Controller.Client.TransactionsCellController;
 import com.budget.tool.Models.Transaction;
@@ -29,4 +29,4 @@ public class TransactionsCellFactory extends ListCell<Transaction> {
             }
         }
     }
-}
+}*/

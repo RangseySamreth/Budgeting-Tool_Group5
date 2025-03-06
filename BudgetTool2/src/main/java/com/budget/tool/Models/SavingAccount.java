@@ -1,4 +1,4 @@
-package com.budget.tool.Models;
+/*package com.budget.tool.Models;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -27,4 +27,4 @@ public class SavingAccount extends Account {
     public void setWithdrawalLimit(double newLimit) {
         this.withdrawalLimit.set(newLimit);
     }
-}
+}*/
