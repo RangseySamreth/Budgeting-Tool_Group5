@@ -1,0 +1,50 @@
+
+.cell_container {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5, 0, 0, 7);
+    -fx-padding: 10;
+}
+
+/* Styling for transaction icon container */
+.trans_icon_container {
+    -fx-background-color: #FFFFFF;
+    -fx-alignment: center;
+    -fx-spacing: 5;
+    -fx-padding: 5;
+}
+
+/* Date label styling */
+.trans_date_lbl {
+    -fx-text-fill: #AAAAAA;
+    -fx-font-weight: 700;
+    -fx-font-size: 12px;
+}
+
+/* Transaction address label */
+.trans_expenses_lbl {
+    -fx-text-fill: #000000;
+    -fx-font-weight: 700;
+    -fx-font-size: 14px;
+}
+
+/* Line separator inside the cell container */
+.cell_container Line {
+    -fx-stroke: #EEEEEE;
+}
+
+.trans_amount_lbl {
+    -fx-background-color: #132A13;
+    -fx-background-radius: 2;
+    -fx-text-fill: #FFFFFF;
+    -fx-padding: 5;
+    -fx-font-weight: 700;
+}
+
+.trans_amount_lbl FontIcon {
+    -fx-icon-color: #FFFFFF;
+}
+
+
+
+
